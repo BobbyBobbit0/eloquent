@@ -1,16 +1,22 @@
 <?php
-
 namespace App\Providers;
 
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
+// Models
+use App\Models\Customer;
+use App\Models\Product;
+use App\Models\Order;
+use App\Models\User;
+
+// Policies
+use App\Policies\CustomerPolicy;
+use App\Policies\ProductPolicy;
+use App\Policies\OrderPolicy;
+use App\Policies\UserPolicy;
+
 class AuthServiceProvider extends ServiceProvider
 {
-    /**
-     * The policy mappings for the application.
-     *
-     * @var array
-     */
     protected $policies = [
         Customer::class => CustomerPolicy::class,
         Product::class => ProductPolicy::class,
@@ -18,14 +24,8 @@ class AuthServiceProvider extends ServiceProvider
         User::class => UserPolicy::class,
     ];
 
-    /**
-     * Register any authentication / authorization services.
-     *
-     * @return void
-     */
-    public function boot()
+    public function boot(): void
     {
         $this->registerPolicies();
-        // Register custom guards or providers here if needed
     }
 }
